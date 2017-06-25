@@ -1,1 +1,1 @@
-# scala-test-for-db-support
+# scalatestplus-db
