@@ -26,6 +26,7 @@ case class MySQLdContext(embeddedMysql: EmbeddedMysql,
     }
   }
   def userName = mySQLdConfig.userWithPassword.map(_.userName).getOrElse("auser")
+  def password = mySQLdConfig.userWithPassword.map(_.password).getOrElse("sa")
 
   override def toString: String = {
     s"MySQLdContext($embeddedMysql, jdbcUrls = $jdbUrls, userName = $userName, mySQLdConfig = $mySQLdConfig, downloadConfig = $downloadConfig, schemaConfigs = $schemaConfigs)"

@@ -1,11 +1,25 @@
 package com.github.j5ik2o.scalatest.db
 
 import com.wix.mysql.EmbeddedMysql
+import org.flywaydb.core.internal.util.jdbc.DriverDataSource
 import org.scalatest.{ FreeSpec, MustMatchers }
 
-class WixMySQLOnInstancePerFreeSpec extends FreeSpec with MustMatchers with WixMySQLOneInstancePerSuite {
+class FlywayOnInstancePerFreeSpec extends FreeSpec with MustMatchers with FlywayOneInstancePerSuite {
 
   override val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
+
+  override protected def flywayConfigs: Seq[FlywayConfig] = wixMySQLContext.jdbUrls.map { jdbcUrl =>
+    FlywayConfig(
+      new DriverDataSource(
+        getClass.getClassLoader,
+        "org.mysql.jdbc.Driver",
+        jdbcUrl,
+        wixMySQLContext.userName,
+        wixMySQLContext.password
+      ),
+      Seq("db")
+    )
+  }
 
   var mysqld: EmbeddedMysql = _
 

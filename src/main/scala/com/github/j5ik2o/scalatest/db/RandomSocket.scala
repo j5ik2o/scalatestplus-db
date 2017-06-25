@@ -7,7 +7,7 @@ object RandomSocket {
   //private[this] val rng                    = new Random
   private[this] val ephemeralSocketAddress = localSocketOnPort(0)
 
-  def apply() = nextAddress()
+  def apply(): InetSocketAddress = nextAddress()
 
   def nextAddress(): InetSocketAddress =
     localSocketOnPort(nextPort())

@@ -36,12 +36,13 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest"              %% "scalatest"         % "3.0.1" % Provided,
-  "com.wix"                    % "wix-embedded-mysql" % "2.2.4",
-  "org.flywaydb"               % "flyway-core"        % "4.2.0",
-  "org.seasar.util"            % "s2util"             % "0.0.1",
-  "com.typesafe.scala-logging" %% "scala-logging"     % "3.5.0",
-  "ch.qos.logback"             % "logback-classic"    % "1.1.7"
+  "org.scalatest"              %% "scalatest"           % "3.0.1" % Provided,
+  "com.wix"                    % "wix-embedded-mysql"   % "2.2.4",
+  "org.flywaydb"               % "flyway-core"          % "4.2.0",
+  "org.seasar.util"            % "s2util"               % "0.0.1",
+  "com.typesafe.scala-logging" %% "scala-logging"       % "3.5.0",
+  "ch.qos.logback"             % "logback-classic"      % "1.1.7",
+  "mysql"                      % "mysql-connector-java" % "5.1.42" % Test
 )
 
 publishMavenStyle := true

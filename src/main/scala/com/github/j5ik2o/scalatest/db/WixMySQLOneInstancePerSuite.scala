@@ -6,13 +6,14 @@ trait WixMySQLOneInstancePerSuite extends TestSuiteMixin with WixMySQLSpecSuppor
 
   private var _context: MySQLdContext = _
 
-  protected def context = _context
+  protected def wixMySQLContext: MySQLdContext = _context
 
   abstract override def run(testName: Option[String], args: Args): Status = {
     _context = startMySQLd(mySQLdConfig = MySQLdConfig(port = Some(RandomSocket.nextPort())))
     try {
       val status = super.run(testName, args)
       status.whenCompleted { _ =>
+        println("finish mysql")
         stopMySQLd(_context)
       }
       status
