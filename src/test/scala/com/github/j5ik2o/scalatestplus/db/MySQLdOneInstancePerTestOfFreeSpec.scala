@@ -3,7 +3,7 @@ package com.github.j5ik2o.scalatestplus.db
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ fixture, MustMatchers }
 
-class MySQLdOnInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
+class MySQLdOneInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
 

@@ -22,5 +22,8 @@ class MySQLdMixedFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLd
       mySQLdContext.schemaConfigs.head.name mustBe "test"
       mySQLdContext.embeddedMysql mustNot be(mysqld)
     }
+    "any test without MySQLd" in { _ =>
+      true mustBe true
+    }
   }
 }

@@ -3,8 +3,8 @@ package com.github.j5ik2o.scalatestplus.db
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ fixture, MustMatchers }
 
-class FlywayWithMySQLdOnInstancePerTestOfFreeSpec
-    extends fixture.FreeSpec
+class FlywayWithMySQLdOneInstancePerTestOfFunSpec
+    extends fixture.FunSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerTest {
 
@@ -14,14 +14,15 @@ class FlywayWithMySQLdOnInstancePerTestOfFreeSpec
 
   var mysqld: EmbeddedMysql = _
 
-  "FlywayWithMySQLdOnInstancePerTestOfFreeSpec" - {
-    "should start & stop mysqld1" in { context =>
+  describe("FlywayWithMySQLdOnInstancePerTestOfFunSpec") {
+    it("should start & stop mysqld1") { context =>
       println(s"context = $context")
       context.mySQLdContext mustNot be(null)
       context.mySQLdContext.schemaConfigs.head.name mustBe "test"
       mysqld = context.mySQLdContext.embeddedMysql
+
     }
-    "should start & stop mysqld2" in { context =>
+    it("should start & stop mysqld2") { context =>
       println(s"context = $context")
       context.mySQLdContext mustNot be(null)
       context.mySQLdContext.schemaConfigs.head.name mustBe "test"

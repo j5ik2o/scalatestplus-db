@@ -23,5 +23,8 @@ class FlywayWithMySQLdMixedFreeSpec extends fixture.FreeSpec with MustMatchers w
       mySQLdContext.schemaConfigs.head.name mustBe "test"
       mySQLdContext.embeddedMysql mustNot be(mysqld)
     }
+    "any test without Flyway with MySQLd" in { _ =>
+      true mustBe true
+    }
   }
 }

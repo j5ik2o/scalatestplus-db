@@ -30,7 +30,7 @@ libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.0-SNAPSH
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ FreeSpec, MustMatchers }
 
-class MySQLdOnInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLdOneInstancePerSuite {
+class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLdOneInstancePerSuite {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
@@ -60,7 +60,7 @@ class MySQLdOnInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLd
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ fixture, MustMatchers }
 
-class MySQLdOnInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
+class MySQLdOneInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
@@ -89,7 +89,7 @@ class MySQLdOnInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatche
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ FreeSpec, MustMatchers }
 
-class FlywayWithMySQLdOnInstancePerFreeSpec
+class FlywayWithMySQLdOneInstancePerFreeSpec
     extends FreeSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerSuite {
@@ -125,7 +125,7 @@ class FlywayWithMySQLdOnInstancePerFreeSpec
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ fixture, MustMatchers }
 
-class FlywayWithMySQLdOnInstancePerTestOfFreeSpec
+class FlywayWithMySQLdOneInstancePerTestOfFreeSpec
     extends fixture.FreeSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerTest {

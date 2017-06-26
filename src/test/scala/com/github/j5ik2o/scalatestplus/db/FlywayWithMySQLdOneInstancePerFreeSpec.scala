@@ -3,7 +3,7 @@ package com.github.j5ik2o.scalatestplus.db
 import com.wix.mysql.EmbeddedMysql
 import org.scalatest.{ FreeSpec, MustMatchers }
 
-class FlywayWithMySQLdOnInstancePerFreeSpec
+class FlywayWithMySQLdOneInstancePerFreeSpec
     extends FreeSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerSuite {
