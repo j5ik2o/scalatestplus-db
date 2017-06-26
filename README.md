@@ -36,7 +36,7 @@ class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQL
 
   var mysqld: EmbeddedMysql = _
 
-  "MySQLdOnInstancePerFreeSpec" - {
+  "MySQLdOneInstancePerFreeSpec" - {
     "should start & stop mysqld1" in {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)
@@ -66,7 +66,7 @@ class MySQLdOneInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatch
 
   var mysqld: EmbeddedMysql = _
 
-  "MySQLdOnInstancePerTestOfFreeSpec" - {
+  "MySQLdOneInstancePerTestOfFreeSpec" - {
     "should start & stop mysqld1" in { context =>
       println(s"context = $context")
       context mustNot be(null)
@@ -100,7 +100,7 @@ class FlywayWithMySQLdOneInstancePerFreeSpec
 
   var mysqld: EmbeddedMysql = _
 
-  "FlywayWithMySQLdOnInstancePerFreeSpec" - {
+  "FlywayWithMySQLdOneInstancePerFreeSpec" - {
     "should start & stop mysqld1" in {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)
@@ -136,7 +136,7 @@ class FlywayWithMySQLdOneInstancePerTestOfFreeSpec
 
   var mysqld: EmbeddedMysql = _
 
-  "FlywayWithMySQLdOnInstancePerTestOfFreeSpec" - {
+  "FlywayWithMySQLdOneInstancePerTestOfFreeSpec" - {
     "should start & stop mysqld1" in { context =>
       println(s"context = $context")
       context.mySQLdContext mustNot be(null)
