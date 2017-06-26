@@ -9,7 +9,7 @@ class MySQLdMixedFunSpec extends fixture.FunSpec with MustMatchers with MySQLdMi
 
   var mysqld: EmbeddedMysql = _
 
-  describe("WixMySQLMixedFunSpec") {
+  describe("MySQLdMixedFunSpec") {
     it("should start & stop mysql1") {
       new WithMySQLdContext() {
         println(s"context = $mySQLdContext")

@@ -14,7 +14,7 @@ class FlywayWithMySQLdOnInstancePerFreeSpec
 
   var mysqld: EmbeddedMysql = _
 
-  "WixMySQLOnInstancePerFreeSpec" - {
+  "FlywayWithMySQLdOnInstancePerFreeSpec" - {
     "should start & stop mysqld1" in {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)

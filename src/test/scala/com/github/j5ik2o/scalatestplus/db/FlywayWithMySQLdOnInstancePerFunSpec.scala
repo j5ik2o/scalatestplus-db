@@ -11,7 +11,7 @@ class FlywayWithMySQLdOnInstancePerFunSpec extends FunSpec with MustMatchers wit
 
   var mysqld: EmbeddedMysql = _
 
-  describe("WixMySQLOnInstancePerFreeSpec") {
+  describe("FlywayWithMySQLdOnInstancePerFunSpec") {
     it("should start & stop mysqld1") {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)

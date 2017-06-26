@@ -9,7 +9,7 @@ class MySQLdMixedFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLd
 
   var mysqld: EmbeddedMysql = _
 
-  "WixMySQLMixedFreeSpec" - {
+  "MySQLdMixedFreeSpec" - {
     "should start & stop mysql1" in new WithMySQLdContext() {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)

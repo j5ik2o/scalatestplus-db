@@ -9,7 +9,7 @@ class MySQLdOnInstancePerTestOfFunSpec extends fixture.FunSpec with MustMatchers
 
   var mysqld: EmbeddedMysql = _
 
-  describe("WixMySQLOnInstancePerTestOfFunSpec") {
+  describe("MySQLdOnInstancePerTestOfFunSpec") {
     it("should start & stop mysqld1") { context =>
       println(s"context = $context")
       context mustNot be(null)

@@ -9,7 +9,7 @@ class MySQLdOnInstancePerFunSpec extends FunSpec with MustMatchers with MySQLdOn
 
   var mysqld: EmbeddedMysql = _
 
-  describe("WixMySQLOnInstancePerFunSpec") {
+  describe("MySQLdOnInstancePerFunSpec") {
     it("should start & stop mysqld1") {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)

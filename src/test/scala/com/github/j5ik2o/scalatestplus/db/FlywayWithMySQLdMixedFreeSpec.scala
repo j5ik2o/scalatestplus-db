@@ -9,7 +9,7 @@ class FlywayWithMySQLdMixedFreeSpec extends fixture.FreeSpec with MustMatchers w
 
   var mysqld: EmbeddedMysql = _
 
-  "FlywayMixedFreeSpec" - {
+  "FlywayWithMySQLdMixedFreeSpec" - {
     "should start & stop mysql1" in new WithFlywayContext(_ => FlywayConfig(Seq("db"))) {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)

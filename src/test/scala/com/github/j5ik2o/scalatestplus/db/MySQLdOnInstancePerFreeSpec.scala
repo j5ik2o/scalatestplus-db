@@ -9,7 +9,7 @@ class MySQLdOnInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLd
 
   var mysqld: EmbeddedMysql = _
 
-  "WixMySQLOnInstancePerFreeSpec" - {
+  "MySQLdOnInstancePerFreeSpec" - {
     "should start & stop mysqld1" in {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)
