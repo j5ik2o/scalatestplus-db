@@ -96,7 +96,7 @@ class FlywayWithMySQLdOnInstancePerFreeSpec
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
 
-  override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(Seq("db"))
+  override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(locations = Seq("db"))
 
   var mysqld: EmbeddedMysql = _
 
@@ -132,7 +132,7 @@ class FlywayWithMySQLdOnInstancePerTestOfFreeSpec
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
 
-  override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(Seq("db"))
+  override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(locations = Seq("db"))
 
   var mysqld: EmbeddedMysql = _
 
