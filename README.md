@@ -32,7 +32,7 @@ import org.scalatest.{ FreeSpec, MustMatchers }
 
 class MySQLdOnInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLdOneInstancePerSuite {
 
-  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
+  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
   var mysqld: EmbeddedMysql = _
 
@@ -62,7 +62,7 @@ import org.scalatest.{ fixture, MustMatchers }
 
 class MySQLdOnInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
 
-  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
+  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
   var mysqld: EmbeddedMysql = _
 
@@ -94,7 +94,7 @@ class FlywayWithMySQLdOnInstancePerFreeSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerSuite {
 
-  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
+  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
   override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(locations = Seq("db"))
 
@@ -130,7 +130,7 @@ class FlywayWithMySQLdOnInstancePerTestOfFreeSpec
     with MustMatchers
     with FlywayWithMySQLdOneInstancePerTest {
 
-  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
+  override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
   override protected def flywayConfig(jdbcUrl: String): FlywayConfig = FlywayConfig(locations = Seq("db"))
 
