@@ -1,13 +1,13 @@
-package com.github.j5ik2o.scalatest.db
+package com.github.j5ik2o.scalatestplus.db
 
 import org.scalatest.{ fixture, Outcome, TestData, TestSuiteMixin }
 
-trait WixMySQLOneInstancePerTest extends TestSuiteMixin with WixMySQLSpecSupport { this: fixture.TestSuite =>
+trait MySQLdOneInstancePerTest extends TestSuiteMixin with MySQLdSpecSupport { this: fixture.TestSuite =>
 
   type FixtureParam = MySQLdContext
 
   def newMySQLd(testData: TestData): MySQLdContext = {
-    startMySQLd(mySQLdConfig = MySQLdConfig(port = Some(RandomSocket.nextPort())))
+    startMySQLd(mySQLdConfig = MySQLdConfig(port = Some(RandomSocket.temporaryServerPort())))
   }
 
   override def withFixture(test: OneArgTest): Outcome = {

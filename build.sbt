@@ -2,13 +2,13 @@ sonatypeProfileName := "com.github.j5ik2o"
 
 organization := "com.github.j5ik2o"
 
-name := "scala-test-for-db-support"
+name := "scalatestplus-db"
 
 version := "1.0.0-SNAPSHOT"
 
 scalaVersion := "2.12.2"
 
-crossScalaVersions := Seq("2.11.8", "2.12.1")
+crossScalaVersions := Seq("2.11.8", "2.12.2")
 
 scalacOptions ++= Seq(
   "-feature",
@@ -41,7 +41,7 @@ libraryDependencies ++= Seq(
   "org.flywaydb"               % "flyway-core"          % "4.2.0",
   "org.seasar.util"            % "s2util"               % "0.0.1",
   "com.typesafe.scala-logging" %% "scala-logging"       % "3.5.0",
-  "ch.qos.logback"             % "logback-classic"      % "1.1.7",
+  "ch.qos.logback"             % "logback-classic"      % "1.1.7" % Test,
   "mysql"                      % "mysql-connector-java" % "5.1.42" % Test
 )
 

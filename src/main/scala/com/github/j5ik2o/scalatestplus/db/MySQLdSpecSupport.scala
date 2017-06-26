@@ -1,4 +1,4 @@
-package com.github.j5ik2o.scalatest.db
+package com.github.j5ik2o.scalatestplus.db
 
 import java.io.File
 import java.net.URL
@@ -13,20 +13,20 @@ import com.wix.mysql.{ EmbeddedMysql, SqlScriptSource }
 import org.seasar.util.io.ResourceUtil
 
 import scala.collection.JavaConverters._
-import scala.concurrent.duration.Duration
-import scala.concurrent.duration._
+import scala.concurrent.duration.{ Duration, _ }
 
 case class MySQLdContext(embeddedMysql: EmbeddedMysql,
                          mySQLdConfig: MySQLdConfig,
                          downloadConfig: DownloadConfig,
                          schemaConfigs: Seq[SchemaConfig]) {
-  def jdbUrls: Seq[String] = {
+  def jdbUrls: Seq[String] =
     schemaConfigs.map { sc =>
       s"jdbc:mysql://localhost:${mySQLdConfig.port.getOrElse(3310)}/${sc.name}?useSSL=false"
     }
-  }
-  def userName = mySQLdConfig.userWithPassword.map(_.userName).getOrElse("auser")
-  def password = mySQLdConfig.userWithPassword.map(_.password).getOrElse("sa")
+
+  def userName: String = mySQLdConfig.userWithPassword.map(_.userName).getOrElse("auser")
+
+  def password: String = mySQLdConfig.userWithPassword.map(_.password).getOrElse("sa")
 
   override def toString: String = {
     s"MySQLdContext($embeddedMysql, jdbcUrls = $jdbUrls, userName = $userName, mySQLdConfig = $mySQLdConfig, downloadConfig = $downloadConfig, schemaConfigs = $schemaConfigs)"
@@ -52,13 +52,15 @@ case class SchemaConfig(name: String,
                         commands: Seq[String] = Seq.empty,
                         scripts: Seq[SqlScriptSource] = Seq.empty)
 
-trait WixMySQLSpecSupport extends LazyLogging {
+trait MySQLdSpecSupport extends LazyLogging {
 
-  val mySQLdConfig: MySQLdConfig = MySQLdConfig()
+  final val MY_SQL_JDBC_DRIVER_NAME = "org.mysql.jdbc.Driver"
 
-  val downloadConfig: DownloadConfig = DownloadConfig()
+  protected val mySQLdConfig: MySQLdConfig = MySQLdConfig()
 
-  val schemaConfigs: Seq[SchemaConfig]
+  protected val downloadConfig: DownloadConfig = DownloadConfig()
+
+  protected val schemaConfigs: Seq[SchemaConfig]
 
   private implicit class ToMySQLdConfig(mySQLdConfig: MySQLdConfig) {
 

@@ -1,18 +1,21 @@
-package com.github.j5ik2o.scalatest.db
+package com.github.j5ik2o.scalatestplus.db
 
 import org.scalatest.{ fixture, TestSuiteMixin }
 
-trait WixMySQLMixedFixtures extends TestSuiteMixin with fixture.UnitFixture with WixMySQLSpecSupport {
+trait MySQLdMixedFixtures extends TestSuiteMixin with fixture.UnitFixture with MySQLdSpecSupport {
   this: fixture.TestSuite =>
 
   abstract class WithMySQLdContext(
-      startMySQLdF: => MySQLdContext = startMySQLd(this.mySQLdConfig, this.downloadConfig, this.schemaConfigs),
+      startMySQLdF: => MySQLdContext =
+        startMySQLd(this.mySQLdConfig.copy(port = Some(RandomSocket.temporaryServerPort())),
+                    this.downloadConfig,
+                    this.schemaConfigs),
       stopMySQLdF: (MySQLdContext) => Unit = stopMySQLd
   ) extends fixture.NoArg {
 
     private var _context: MySQLdContext = _
 
-    def context: MySQLdContext = _context
+    protected def mySQLdContext: MySQLdContext = _context
 
     override def apply(): FixtureParam = {
       def callSuper(): FixtureParam = super.apply()
