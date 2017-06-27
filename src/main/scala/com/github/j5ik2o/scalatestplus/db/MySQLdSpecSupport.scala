@@ -55,14 +55,14 @@ trait MySQLdSpecSupport extends LazyLogging {
 
   final val MY_SQL_JDBC_DRIVER_NAME = "org.mysql.jdbc.Driver"
 
-  protected val mySQLdConfig: MySQLdConfig = MySQLdConfig()
+  protected def mySQLdConfig: MySQLdConfig = MySQLdConfig(port = Some(RandomSocket.temporaryServerPort()))
 
-  protected val downloadConfig: DownloadConfig = DownloadConfig(
+  protected def downloadConfig: DownloadConfig = DownloadConfig(
     baseUrl = new URL("https://dev.mysql.com/get/Downloads/"),
     cacheDir = new File(ResourceUtil.getBuildDir(getClass), "/../../")
   )
 
-  protected val schemaConfigs: Seq[SchemaConfig]
+  protected def schemaConfigs: Seq[SchemaConfig]
 
   private implicit class ToMySQLdConfig(mySQLdConfig: MySQLdConfig) {
 
