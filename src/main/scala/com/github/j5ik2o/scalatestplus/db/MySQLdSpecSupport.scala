@@ -55,6 +55,10 @@ trait MySQLdSpecSupport extends LazyLogging {
 
   final val MY_SQL_JDBC_DRIVER_NAME = "org.mysql.jdbc.Driver"
 
+  protected val waitTimeForStartup: Option[FiniteDuration] = None
+
+  protected val waitTimeForStopped: Option[FiniteDuration] = None
+
   protected def mySQLdConfig: MySQLdConfig = MySQLdConfig(port = Some(RandomSocket.temporaryServerPort()))
 
   protected def downloadConfig: DownloadConfig = DownloadConfig(
@@ -136,12 +140,18 @@ trait MySQLdSpecSupport extends LazyLogging {
       downloadConfig,
       schemaConfigs
     )
+    waitTimeForStartup.foreach { time =>
+      TimeUnit.MILLISECONDS.sleep(time.toMillis)
+    }
     logger.info(s"mysqld has started: context = $result")
     result
   }
 
   protected def stopMySQLd(mySQLdContext: MySQLdContext): Unit = {
     mySQLdContext.embeddedMysql.stop()
+    waitTimeForStopped.foreach { time =>
+      TimeUnit.MILLISECONDS.sleep(time.toMillis)
+    }
     logger.info(s"mysqld has stopped: context = $mySQLdContext")
   }
 
