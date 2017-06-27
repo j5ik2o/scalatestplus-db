@@ -61,6 +61,7 @@ releaseProcess := Seq[ReleaseStep](
   ),
   setNextVersion,
   commitNextVersion,
+  updateReadmeProcess,
   ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
   pushChanges
 )
