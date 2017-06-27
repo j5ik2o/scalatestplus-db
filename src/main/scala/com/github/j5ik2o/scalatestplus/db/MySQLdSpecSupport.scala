@@ -44,8 +44,7 @@ case class MySQLdConfig(version: Version = v5_7_latest,
                         serverVariables: Map[String, Any] = Map.empty,
                         tempDir: Option[File] = None)
 
-case class DownloadConfig(baseUrl: URL = new URL("https://dev.mysql.com/get/Downloads/"),
-                          cacheDir: File = new File(ResourceUtil.getBuildDir(getClass), "/../../"))
+case class DownloadConfig(baseUrl: URL, cacheDir: File)
 
 case class SchemaConfig(name: String,
                         charset: Charset = Charset.defaults(),
@@ -58,7 +57,10 @@ trait MySQLdSpecSupport extends LazyLogging {
 
   protected val mySQLdConfig: MySQLdConfig = MySQLdConfig()
 
-  protected val downloadConfig: DownloadConfig = DownloadConfig()
+  protected val downloadConfig: DownloadConfig = DownloadConfig(
+    baseUrl = new URL("https://dev.mysql.com/get/Downloads/"),
+    cacheDir = new File(ResourceUtil.getBuildDir(getClass), "/../../")
+  )
 
   protected val schemaConfigs: Seq[SchemaConfig]
 
