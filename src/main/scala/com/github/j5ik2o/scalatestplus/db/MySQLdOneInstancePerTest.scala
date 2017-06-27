@@ -6,8 +6,10 @@ trait MySQLdOneInstancePerTest extends TestSuiteMixin with MySQLdSpecSupport { t
 
   type FixtureParam = MySQLdContext
 
+  protected def mySQLdPort: Option[Int] = Some(RandomSocket.temporaryServerPort())
+
   def newMySQLd(testData: TestData): MySQLdContext = {
-    startMySQLd(mySQLdConfig = MySQLdConfig(port = Some(RandomSocket.temporaryServerPort())))
+    startMySQLd(mySQLdConfig = MySQLdConfig(port = mySQLdPort))
   }
 
   override def withFixture(test: OneArgTest): Outcome = {
