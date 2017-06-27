@@ -19,7 +19,7 @@ libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.2"
 ```scala
 resolvers += "Sonatype OSS Snapshot Repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.2-SNAPSHOT"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.3-SNAPSHOT"
 ```
 
 ## Usage
