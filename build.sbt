@@ -4,9 +4,9 @@ organization := "com.github.j5ik2o"
 
 name := "scalatestplus-db"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.7"
 
-crossScalaVersions := Seq("2.11.8", "2.12.2")
+crossScalaVersions := Seq("2.11.8", "2.12.7")
 
 scalacOptions ++= Seq(
   "-feature",
@@ -73,7 +73,10 @@ pomExtra := (
     </developers>
 )
 
+scalafmtOnCompile in Compile := true
+
 credentials := {
   val ivyCredentials = (baseDirectory in LocalRootProject).value / ".credentials"
   Credentials(ivyCredentials) :: Nil
 }
+

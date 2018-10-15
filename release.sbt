@@ -1,3 +1,4 @@
+import Utils._
 import sbtrelease._
 import sbtrelease.ReleasePlugin.autoImport.ReleaseTransformations._
 
@@ -24,9 +25,9 @@ val updateReadme: State => State = { state =>
     .mkString("", "\n", "\n")
   IO.write(readmeFile, newReadme)
   val git = new Git(extracted get baseDirectory)
-  git.add(readme) ! state.log
-  git.commit(message = "update " + readme, sign = false) ! state.log
-  "git diff HEAD^" ! state.log
+  git.add(readme) ! state.log.toScalaProcessLogger
+  git.commit(message = "update " + readme, sign = false) ! state.log.toScalaProcessLogger
+  git.cmd("git diff HEAD^") ! state.log.toScalaProcessLogger
   state
 }
 
@@ -45,16 +46,10 @@ releaseProcess := Seq[ReleaseStep](
   commitReleaseVersion,
   updateReadmeProcess,
   tagRelease,
-  ReleaseStep(
-    action = { state =>
-      val extracted = Project extract state
-      extracted.runAggregated(PgpKeys.publishSigned in Global in extracted.get(thisProjectRef), state)
-    },
-    enableCrossBuild = true
-  ),
+  releaseStepCommand("+publishSigned"),
   setNextVersion,
   commitNextVersion,
   updateReadmeProcess,
-  ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
+  releaseStepCommand("sonatypeReleaseAll"),
   pushChanges
 )
