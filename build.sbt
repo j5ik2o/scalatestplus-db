@@ -73,6 +73,8 @@ pomExtra := (
     </developers>
 )
 
+publishTo in ThisBuild := sonatypePublishTo.value
+
 scalafmtOnCompile in Compile := true
 
 credentials := {
