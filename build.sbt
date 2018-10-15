@@ -52,7 +52,7 @@ pomIncludeRepository := { _ =>
 }
 
 pomExtra := (
-  <url>https://github.com/sisioh/baseunits-scala</url>
+  <url>https://github.com/j5ik2o/scalatestplus-db</url>
     <licenses>
       <license>
         <name>MIT License</name>
@@ -61,14 +61,14 @@ pomExtra := (
       </license>
     </licenses>
     <scm>
-      <url>git@github.com:j5ik2o/scala-test-for-db-support.git</url>
-      <connection>scm:git:git@github.com:j5ik2o/scala-test-for-db-support.git</connection>
+      <url>git@github.com:j5ik2o/scalatestplus-db.git</url>
+      <connection>scm:git:git@github.com:j5ik2o/scalatestplus-db.git</connection>
     </scm>
     <developers>
       <developer>
         <id>j5ik2o</id>
         <name>Junichi Kato</name>
-        <url>http://j5ik2o.me</url>
+        <url>http://blog.j5ik2o.me</url>
       </developer>
     </developers>
 )
