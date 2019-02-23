@@ -4,9 +4,9 @@ organization := "com.github.j5ik2o"
 
 name := "scalatestplus-db"
 
-scalaVersion := "2.12.7"
+scalaVersion := "2.12.8"
 
-crossScalaVersions := Seq("2.11.8", "2.12.7")
+crossScalaVersions := Seq("2.11.11", "2.12.8")
 
 scalacOptions ++= Seq(
   "-feature",
@@ -35,7 +35,7 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.scalatest"              %% "scalatest"           % "3.0.1" % Provided,
-  "com.wix"                    % "wix-embedded-mysql"   % "2.2.4",
+  "com.wix"                    % "wix-embedded-mysql"   % "4.2.0",
   "org.flywaydb"               % "flyway-core"          % "4.2.0",
   "org.seasar.util"            % "s2util"               % "0.0.1",
   "com.typesafe.scala-logging" %% "scala-logging"       % "3.5.0",
