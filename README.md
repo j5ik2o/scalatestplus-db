@@ -1,5 +1,7 @@
 # scalatestplus-db
 
+[![CircleCI](https://circleci.com/gh/j5ik2o/scalatestplus-db.svg?style=svg)](https://circleci.com/gh/j5ik2o/scalatestplus-db)
+
 This library is a ScalaTest extension library that supports embedded MySQL and Flyway.
 
 ## Installation
