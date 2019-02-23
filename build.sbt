@@ -33,6 +33,10 @@ scalacOptions ++= Seq(
   "-Ywarn-unused-import" // Warn when imports are unused.
 )
 
+resolvers ++= Seq(
+  "Seasar Repository" at "http://maven.seasar.org/maven2/"
+)
+
 libraryDependencies ++= Seq(
   "org.scalatest"              %% "scalatest"           % "3.0.1" % Provided,
   "com.wix"                    % "wix-embedded-mysql"   % "4.2.0",
