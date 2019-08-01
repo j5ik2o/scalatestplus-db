@@ -1,6 +1,6 @@
 package com.github.j5ik2o.scalatestplus.db
 
-import org.flywaydb.core.internal.util.jdbc.DriverDataSource
+import org.flywaydb.core.internal.jdbc.DriverDataSource
 import org.scalatest.{ fixture, Outcome, TestData, TestSuiteMixin }
 
 case class MySQLdContextWithFlywayContexts(mySQLdContext: MySQLdContext, flywayContexts: Seq[FlywayContext])
