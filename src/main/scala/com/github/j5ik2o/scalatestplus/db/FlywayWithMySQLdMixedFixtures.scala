@@ -1,21 +1,22 @@
 package com.github.j5ik2o.scalatestplus.db
 
 import org.flywaydb.core.internal.jdbc.DriverDataSource
-import org.scalatest.{ fixture, TestSuiteMixin }
+import org.scalatest.{ fixture, FixtureTestSuite, TestSuiteMixin }
 
 trait FlywayWithMySQLdMixedFixtures
     extends TestSuiteMixin
     with fixture.UnitFixture
     with MySQLdSpecSupport
-    with FlywaySpecSupport { this: fixture.TestSuite =>
+    with FlywaySpecSupport { this: FixtureTestSuite =>
 
   abstract class WithFlywayContext(
-      flywayConfigF: (String) => FlywayConfig,
-      startMySQLdF: => MySQLdContext =
-        startMySQLd(this.mySQLdConfig.copy(port = Some(RandomSocket.temporaryServerPort())),
-                    this.downloadConfig,
-                    this.schemaConfigs),
-      stopMySQLdF: (MySQLdContext) => Unit = stopMySQLd
+      flywayConfigF: String => FlywayConfig,
+      startMySQLdF: => MySQLdContext = startMySQLd(
+        this.mySQLdConfig.copy(port = Some(RandomSocket.temporaryServerPort())),
+        this.downloadConfig,
+        this.schemaConfigs
+      ),
+      stopMySQLdF: MySQLdContext => Unit = stopMySQLd
   ) extends fixture.NoArg {
 
     private var _mySQLdContext: MySQLdContext = _
@@ -42,12 +43,16 @@ trait FlywayWithMySQLdMixedFixtures
         _mySQLdContext = startMySQLdF
         _flywayContexts = _mySQLdContext.jdbUrls.map { jdbcUrl =>
           val flywayContext = createFlywayContext(
-            FlywayConfigWithDataSource(new DriverDataSource(classLoader(jdbcUrl),
-                                                            driverClassName(jdbcUrl),
-                                                            jdbcUrl,
-                                                            mySQLdContext.userName,
-                                                            mySQLdContext.password),
-                                       flywayConfigF(jdbcUrl))
+            FlywayConfigWithDataSource(
+              new DriverDataSource(
+                classLoader(jdbcUrl),
+                driverClassName(jdbcUrl),
+                jdbcUrl,
+                mySQLdContext.userName,
+                mySQLdContext.password
+              ),
+              flywayConfigF(jdbcUrl)
+            )
           )
           flywayMigrate(flywayContext)
           flywayContext
