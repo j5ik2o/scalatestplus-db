@@ -10,7 +10,7 @@ class MySQLdOneInstancePerFreeSpec extends AnyFreeSpec with Matchers with MySQLd
 
   var mysqld: EmbeddedMysql = _
 
-  "MySQLdOnInstancePerFreeSpec" - {
+  "MySQLdOneInstancePerFreeSpec" - {
     "should start & stop mysqld1" in {
       println(s"context = $mySQLdContext")
       mySQLdContext mustNot be(null)
