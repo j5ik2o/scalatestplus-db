@@ -16,7 +16,7 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("releases")
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.10"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "<version>"
 ```
 
 ### Snapshot Version
@@ -27,7 +27,7 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots")
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.11-SNAPSHOT"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "<version>-SNAPSHOT"
 ```
 
 ## Usage
