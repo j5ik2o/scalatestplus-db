@@ -15,7 +15,7 @@ class FlywayWithMySQLdOneInstancePerTestOfFreeSpec
 
   var mysqld: EmbeddedMysql = _
 
-  "FlywayWithMySQLdOnInstancePerTestOfFreeSpec" - {
+  "FlywayWithMySQLdOneInstancePerTestOfFreeSpec" - {
     "should start & stop mysqld1" in { context =>
       println(s"context = $context")
       context.mySQLdContext mustNot be(null)

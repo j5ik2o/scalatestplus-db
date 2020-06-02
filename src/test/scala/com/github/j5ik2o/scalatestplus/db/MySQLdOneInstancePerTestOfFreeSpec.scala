@@ -10,7 +10,7 @@ class MySQLdOneInstancePerTestOfFreeSpec extends FixtureAnyFreeSpec with Matcher
 
   var mysqld: EmbeddedMysql = _
 
-  "MySQLdOnInstancePerTestOfFreeSpec" - {
+  "MySQLdOneInstancePerTestOfFreeSpec" - {
     "should start & stop mysqld1" in { context =>
       println(s"context = $context")
       context mustNot be(null)

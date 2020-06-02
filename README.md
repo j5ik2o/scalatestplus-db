@@ -6,28 +6,28 @@ This library is a ScalaTest extension library that supports embedded MySQL and F
 
 ## Installation
 
-Add the following to your sbt build (Scala 2.11.x, 2.12.x):
+Add the following to your sbt build (Scala 2.11.x, 2.12.x, 2.13.x):
 
 ### Release Version
 
 ```scala
 resolvers ++= Seq(
-  "Seasar Repository" at "http://maven.seasar.org/maven2/",
-  "Sonatype OSS Release Repository" at "https://oss.sonatype.org/content/repositories/releases/"
+  "Seasar Repository" at "https://maven.seasar.org/maven2/",
+  Resolver.sonatypeRepo("releases")
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.9"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.10"
 ```
 
 ### Snapshot Version
 
 ```scala
 resolvers ++= Seq(
-  "Seasar Repository" at "http://maven.seasar.org/maven2/",
-  "Sonatype OSS Snapshot Repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
+  "Seasar Repository" at "https://maven.seasar.org/maven2/",
+  Resolver.sonatypeRepo("snapshots")
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.10-SNAPSHOT"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.11-SNAPSHOT"
 ```
 
 ## Usage
@@ -36,9 +36,10 @@ libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.10-
 
 ```scala
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ FreeSpec, MustMatchers }
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLdOneInstancePerSuite {
+class MySQLdOneInstancePerFreeSpec extends AnyFreeSpec with Matchers with MySQLdOneInstancePerSuite {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
@@ -58,6 +59,7 @@ class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQL
       mySQLdContext.embeddedMysql mustBe mysqld
     }
   }
+
 }
 ```
 
@@ -66,9 +68,10 @@ class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQL
 
 ```scala
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ fixture, MustMatchers }
+import org.scalatest.freespec.FixtureAnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class MySQLdOneInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatchers with MySQLdOneInstancePerTest {
+class MySQLdOneInstancePerTestOfFreeSpec extends FixtureAnyFreeSpec with Matchers with MySQLdOneInstancePerTest {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
 
@@ -95,11 +98,12 @@ class MySQLdOneInstancePerTestOfFreeSpec extends fixture.FreeSpec with MustMatch
 
 ```scala
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ FreeSpec, MustMatchers }
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
 class FlywayWithMySQLdOneInstancePerFreeSpec
-    extends FreeSpec
-    with MustMatchers
+    extends AnyFreeSpec
+    with Matchers
     with FlywayWithMySQLdOneInstancePerSuite {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
@@ -128,14 +132,14 @@ class FlywayWithMySQLdOneInstancePerFreeSpec
 
 ### When starting MySQLd with Flyway for each test case
 
-
 ```scala
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ fixture, MustMatchers }
+import org.scalatest.freespec.FixtureAnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
 class FlywayWithMySQLdOneInstancePerTestOfFreeSpec
-    extends fixture.FreeSpec
-    with MustMatchers
+    extends FixtureAnyFreeSpec
+    with Matchers
     with FlywayWithMySQLdOneInstancePerTest {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig(name = "test"))
