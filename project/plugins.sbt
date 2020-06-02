@@ -1,12 +1,13 @@
 resolvers ++= Seq(
-  "Sonatype OSS Snapshot Repository" at "https://oss.sonatype.org/content/repositories/snapshots",
-  "Sonatype OSS Release Repository" at "https://oss.sonatype.org/content/repositories/releases/"
+  Resolver.sonatypeRepo("snapshots"),
+  Resolver.sonatypeRepo("releases"),
+  "Seasar Repository" at "https://maven.seasar.org/maven2/"
 )
 
-addSbtPlugin("com.lucidchart" % "sbt-scalafmt" % "1.15")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.0")
 
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.2")
 
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.0")
+addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.1")
 
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.9")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")

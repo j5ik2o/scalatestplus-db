@@ -4,16 +4,20 @@ import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.callback.Callback
 import org.flywaydb.core.internal.jdbc.DriverDataSource
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
-case class PlaceholderConfig(placeholderReplacement: Boolean = false,
-                             placeholders: Map[String, String] = Map.empty,
-                             placeholderPrefix: Option[String] = None,
-                             placeholderSuffix: Option[String] = None)
+case class PlaceholderConfig(
+    placeholderReplacement: Boolean = false,
+    placeholders: Map[String, String] = Map.empty,
+    placeholderPrefix: Option[String] = None,
+    placeholderSuffix: Option[String] = None
+)
 
-case class FlywayConfig(locations: Seq[String],
-                        callbacks: Seq[Callback] = Seq.empty,
-                        placeholderConfig: Option[PlaceholderConfig] = None)
+case class FlywayConfig(
+    locations: Seq[String],
+    callbacks: Seq[Callback] = Seq.empty,
+    placeholderConfig: Option[PlaceholderConfig] = None
+)
 
 case class FlywayConfigWithDataSource(driverDataSource: DriverDataSource, config: FlywayConfig)
 
@@ -36,8 +40,7 @@ trait FlywaySpecSupport {
         configure.placeholderSuffix(ps)
       }
     }
-    val flyway = configure.load()
-    FlywayContext(flyway, flywayConfigWithDataSource)
+    FlywayContext(configure.load(), flywayConfigWithDataSource)
   }
 
 }

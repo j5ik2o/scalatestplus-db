@@ -1,9 +1,10 @@
 package com.github.j5ik2o.scalatestplus.db
 
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ FreeSpec, MustMatchers }
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.must.Matchers
 
-class MySQLdOneInstancePerFreeSpec extends FreeSpec with MustMatchers with MySQLdOneInstancePerSuite {
+class MySQLdOneInstancePerFreeSpec extends AnyFreeSpec with Matchers with MySQLdOneInstancePerSuite {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
 
