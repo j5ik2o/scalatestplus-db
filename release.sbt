@@ -16,7 +16,6 @@ releaseProcess := Seq[ReleaseStep](
     },
     enableCrossBuild = true
   ),
-  releaseStepCommandAndRemaining("+publishSigned"),
   releaseStepCommand("sonatypeBundleRelease"),
   setNextVersion,
   commitNextVersion,
