@@ -1,6 +1,6 @@
 package com.github.j5ik2o.scalatestplus.db
 
-import org.flywaydb.core.internal.util.jdbc.DriverDataSource
+import org.flywaydb.core.internal.jdbc.DriverDataSource
 import org.scalatest.{ Args, Status, TestSuite, TestSuiteMixin }
 
 trait FlywayWithMySQLdOneInstancePerSuite extends FlywayOneInstancePerSuiteBase with MySQLdOneInstancePerSuite {
@@ -16,18 +16,19 @@ trait FlywayOneInstancePerSuiteBase extends TestSuiteMixin with FlywaySpecSuppor
 
   protected def flywayConfig(jdbcUrl: String): FlywayConfig
 
-  protected def flywayConfigWithDataSources: Seq[FlywayConfigWithDataSource] = mySQLdContext.jdbUrls.map { jdbcUrl =>
-    FlywayConfigWithDataSource(
-      new DriverDataSource(
-        getClass.getClassLoader,
-        MY_SQL_JDBC_DRIVER_NAME,
-        jdbcUrl,
-        mySQLdContext.userName,
-        mySQLdContext.password
-      ),
-      flywayConfig(jdbcUrl)
-    )
-  }
+  protected def flywayConfigWithDataSources: Seq[FlywayConfigWithDataSource] =
+    mySQLdContext.jdbUrls.map { jdbcUrl =>
+      FlywayConfigWithDataSource(
+        new DriverDataSource(
+          getClass.getClassLoader,
+          MY_SQL_JDBC_DRIVER_NAME,
+          jdbcUrl,
+          mySQLdContext.userName,
+          mySQLdContext.password
+        ),
+        flywayConfig(jdbcUrl)
+      )
+    }
 
   protected def flywayMigrate(flywayContext: FlywayContext): Int =
     flywayContext.flyway.migrate()

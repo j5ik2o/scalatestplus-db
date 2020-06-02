@@ -1,8 +1,8 @@
 package com.github.j5ik2o.scalatestplus.db
 
-import org.scalatest.{ fixture, Outcome, TestData, TestSuiteMixin }
+import org.scalatest.{ FixtureTestSuite, Outcome, TestData, TestSuiteMixin }
 
-trait MySQLdOneInstancePerTest extends TestSuiteMixin with MySQLdSpecSupport { this: fixture.TestSuite =>
+trait MySQLdOneInstancePerTest extends TestSuiteMixin with MySQLdSpecSupport { this: FixtureTestSuite =>
 
   type FixtureParam = MySQLdContext
 
