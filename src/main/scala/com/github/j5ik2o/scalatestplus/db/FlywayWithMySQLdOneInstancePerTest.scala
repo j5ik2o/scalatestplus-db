@@ -1,12 +1,12 @@
 package com.github.j5ik2o.scalatestplus.db
 
-import org.flywaydb.core.internal.util.jdbc.DriverDataSource
-import org.scalatest.{ fixture, Outcome, TestData, TestSuiteMixin }
+import org.flywaydb.core.internal.jdbc.DriverDataSource
+import org.scalatest.{ FixtureTestSuite, Outcome, TestData, TestSuiteMixin }
 
 case class MySQLdContextWithFlywayContexts(mySQLdContext: MySQLdContext, flywayContexts: Seq[FlywayContext])
 
 trait FlywayWithMySQLdOneInstancePerTest extends TestSuiteMixin with FlywaySpecSupport with MySQLdSpecSupport {
-  this: fixture.TestSuite =>
+  this: FixtureTestSuite =>
 
   type FixtureParam = MySQLdContextWithFlywayContexts
 
@@ -36,12 +36,16 @@ trait FlywayWithMySQLdOneInstancePerTest extends TestSuiteMixin with FlywaySpecS
       flywayContexts = mySQLdContext.jdbUrls.map { jdbcUrl =>
         val flywayContext =
           createFlywayContext(
-            FlywayConfigWithDataSource(new DriverDataSource(classLoader(jdbcUrl),
-                                                            driverClassName(jdbcUrl),
-                                                            jdbcUrl,
-                                                            mySQLdContext.userName,
-                                                            mySQLdContext.password),
-                                       flywayConfig(jdbcUrl))
+            FlywayConfigWithDataSource(
+              new DriverDataSource(
+                classLoader(jdbcUrl),
+                driverClassName(jdbcUrl),
+                jdbcUrl,
+                mySQLdContext.userName,
+                mySQLdContext.password
+              ),
+              flywayConfig(jdbcUrl)
+            )
           )
         flywayMigrate(flywayContext)
         flywayContext

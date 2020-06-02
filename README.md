@@ -16,7 +16,7 @@ resolvers ++= Seq(
   "Sonatype OSS Release Repository" at "https://oss.sonatype.org/content/repositories/releases/"
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.8"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.9"
 ```
 
 ### Snapshot Version
@@ -27,7 +27,7 @@ resolvers ++= Seq(
   "Sonatype OSS Snapshot Repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
 )
 
-libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db" % "1.0.9-SNAPSHOT"
+libraryDependencies += "com.github.j5ik2o" %% "scalatestplus-db-core" % "1.0.10-SNAPSHOT"
 ```
 
 ## Usage

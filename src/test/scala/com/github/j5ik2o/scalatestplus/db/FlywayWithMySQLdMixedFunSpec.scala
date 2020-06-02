@@ -1,9 +1,10 @@
 package com.github.j5ik2o.scalatestplus.db
 
 import com.wix.mysql.EmbeddedMysql
-import org.scalatest.{ fixture, MustMatchers }
+import org.scalatest.funspec.FixtureAnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
-class FlywayWithMySQLdMixedFunSpec extends fixture.FunSpec with MustMatchers with FlywayWithMySQLdMixedFixtures {
+class FlywayWithMySQLdMixedFunSpec extends FixtureAnyFunSpec with Matchers with FlywayWithMySQLdMixedFixtures {
 
   override protected val schemaConfigs: Seq[SchemaConfig] = Seq(SchemaConfig("test"))
 

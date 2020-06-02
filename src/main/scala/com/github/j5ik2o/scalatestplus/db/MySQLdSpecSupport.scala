@@ -12,13 +12,16 @@ import com.wix.mysql.distribution.Version._
 import com.wix.mysql.{ EmbeddedMysql, SqlScriptSource }
 import org.seasar.util.io.ResourceUtil
 
-import scala.collection.JavaConverters._
 import scala.concurrent.duration.{ Duration, _ }
+import scala.jdk.CollectionConverters._
 
-case class MySQLdContext(embeddedMysql: EmbeddedMysql,
-                         mySQLdConfig: MySQLdConfig,
-                         downloadConfig: DownloadConfig,
-                         schemaConfigs: Seq[SchemaConfig]) {
+case class MySQLdContext(
+    embeddedMysql: EmbeddedMysql,
+    mySQLdConfig: MySQLdConfig,
+    downloadConfig: DownloadConfig,
+    schemaConfigs: Seq[SchemaConfig]
+) {
+
   def jdbUrls: Seq[String] =
     schemaConfigs.map { sc =>
       s"jdbc:mysql://localhost:${mySQLdConfig.port.getOrElse(3310)}/${sc.name}?useSSL=false"
@@ -35,21 +38,25 @@ case class MySQLdContext(embeddedMysql: EmbeddedMysql,
 
 case class UserWithPassword(userName: String, password: String)
 
-case class MySQLdConfig(version: Version = v5_7_latest,
-                        port: Option[Int] = None,
-                        timeout: Option[Duration] = Some(30 seconds),
-                        charset: Charset = Charset.defaults(),
-                        userWithPassword: Option[UserWithPassword] = None,
-                        timeZone: Option[TimeZone] = None,
-                        serverVariables: Map[String, Any] = Map.empty,
-                        tempDir: Option[File] = None)
+case class MySQLdConfig(
+    version: Version = v5_7_latest,
+    port: Option[Int] = None,
+    timeout: Option[Duration] = Some(30 seconds),
+    charset: Charset = Charset.defaults(),
+    userWithPassword: Option[UserWithPassword] = None,
+    timeZone: Option[TimeZone] = None,
+    serverVariables: Map[String, Any] = Map.empty,
+    tempDir: Option[File] = None
+)
 
 case class DownloadConfig(baseUrl: URL, cacheDir: File)
 
-case class SchemaConfig(name: String,
-                        charset: Charset = Charset.defaults(),
-                        commands: Seq[String] = Seq.empty,
-                        scripts: Seq[SqlScriptSource] = Seq.empty)
+case class SchemaConfig(
+    name: String,
+    charset: Charset = Charset.defaults(),
+    commands: Seq[String] = Seq.empty,
+    scripts: Seq[SqlScriptSource] = Seq.empty
+)
 
 trait MySQLdSpecSupport extends LazyLogging {
 
@@ -61,10 +68,11 @@ trait MySQLdSpecSupport extends LazyLogging {
 
   protected def mySQLdConfig: MySQLdConfig = MySQLdConfig(port = Some(RandomSocket.temporaryServerPort()))
 
-  protected def downloadConfig: DownloadConfig = DownloadConfig(
-    baseUrl = new URL("https://dev.mysql.com/get/Downloads/"),
-    cacheDir = new File(ResourceUtil.getBuildDir(getClass), "/../../")
-  )
+  protected def downloadConfig: DownloadConfig =
+    DownloadConfig(
+      baseUrl = new URL("https://dev.mysql.com/get/Downloads/"),
+      cacheDir = new File(ResourceUtil.getBuildDir(getClass), "/../../")
+    )
 
   protected def schemaConfigs: Seq[SchemaConfig]
 
@@ -90,6 +98,7 @@ trait MySQLdSpecSupport extends LazyLogging {
   }
 
   private implicit class ToDownloadConfig(downloadConfig: DownloadConfig) {
+
     def asWix: DC = {
       val result0 = DC.aDownloadConfig()
       val result1 = result0.withBaseUrl(downloadConfig.baseUrl.toString)
@@ -119,9 +128,11 @@ trait MySQLdSpecSupport extends LazyLogging {
 
   }
 
-  protected def startMySQLd(mySQLdConfig: MySQLdConfig = this.mySQLdConfig,
-                            downloadConfig: DownloadConfig = this.downloadConfig,
-                            schemaConfigs: Seq[SchemaConfig] = this.schemaConfigs): MySQLdContext = {
+  protected def startMySQLd(
+      mySQLdConfig: MySQLdConfig = this.mySQLdConfig,
+      downloadConfig: DownloadConfig = this.downloadConfig,
+      schemaConfigs: Seq[SchemaConfig] = this.schemaConfigs
+  ): MySQLdContext = {
     val mysql = EmbeddedMysql.anEmbeddedMysql(mySQLdConfig.asWix, downloadConfig.asWix)
     val mysql2 =
       if (schemaConfigs.nonEmpty) schemaConfigs.asWix.foldLeft(mysql)(_ addSchema _)
