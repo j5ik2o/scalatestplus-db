@@ -21,45 +21,48 @@ scalacOptions ++= Seq(
   "-Ywarn-numeric-widen" // Warn when numerics are widened.
 ) ++ {
   CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2L, scalaMajor)) if scalaMajor == 13 => Seq(
-      "-Xlint:adapted-args"  // Warn if an argument list is modified to match the receiver.
-      ,
-      "-Xlint:inaccessible" // Warn about inaccessible types in method signatures.
-      ,
-      "-Xlint:infer-any" // Warn when a type argument is inferred to be `Any`.
-      ,
-      "-Xlint:nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
-      ,
-      "-Xlint:nullary-unit" // Warn when nullary methods return Unit.
-      ,
-      "-Xlint:unused" // Enable -Wunused:imports,privates,locals,implicits.
-    )
-    case Some((2L, scalaMajor)) if scalaMajor == 12 => Seq(
-      "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver
-      ,
-      "-Ywarn-inaccessible" // Warn about inaccessible types in method signatures.
-      ,
-      "-Ywarn-infer-any" // Warn when a type argument is inferred to be `Any`.
-      ,
-      "-Ywarn-nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
-      ,
-      "-Ywarn-nullary-unit" // Warn when nullary methods return Unit.
-      ,
-      "-Ywarn-unused-import" // Warn when imports are unused.
-    )
-    case Some((2L, scalaMajor)) if scalaMajor <= 11 => Seq(
-      "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver
-      ,
-      "-Ywarn-inaccessible" // Warn about inaccessible types in method signatures.
-      ,
-      "-Ywarn-infer-any" // Warn when a type argument is inferred to be `Any`.
-      ,
-      "-Ywarn-nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
-      ,
-      "-Ywarn-nullary-unit" // Warn when nullary methods return Unit.
-      ,
-      "-Ywarn-unused-import" // Warn when imports are unused.
-    )
+    case Some((2L, scalaMajor)) if scalaMajor == 13 =>
+      Seq(
+        "-Xlint:adapted-args" // Warn if an argument list is modified to match the receiver.
+        ,
+        "-Xlint:inaccessible" // Warn about inaccessible types in method signatures.
+        ,
+        "-Xlint:infer-any" // Warn when a type argument is inferred to be `Any`.
+        ,
+        "-Xlint:nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
+        ,
+        "-Xlint:nullary-unit" // Warn when nullary methods return Unit.
+        ,
+        "-Xlint:unused" // Enable -Wunused:imports,privates,locals,implicits.
+      )
+    case Some((2L, scalaMajor)) if scalaMajor == 12 =>
+      Seq(
+        "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver
+        ,
+        "-Ywarn-inaccessible" // Warn about inaccessible types in method signatures.
+        ,
+        "-Ywarn-infer-any" // Warn when a type argument is inferred to be `Any`.
+        ,
+        "-Ywarn-nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
+        ,
+        "-Ywarn-nullary-unit" // Warn when nullary methods return Unit.
+        ,
+        "-Ywarn-unused-import" // Warn when imports are unused.
+      )
+    case Some((2L, scalaMajor)) if scalaMajor <= 11 =>
+      Seq(
+        "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver
+        ,
+        "-Ywarn-inaccessible" // Warn about inaccessible types in method signatures.
+        ,
+        "-Ywarn-infer-any" // Warn when a type argument is inferred to be `Any`.
+        ,
+        "-Ywarn-nullary-override" // Warn when non-nullary `def f()' overrides nullary `def f'
+        ,
+        "-Ywarn-nullary-unit" // Warn when nullary methods return Unit.
+        ,
+        "-Ywarn-unused-import" // Warn when imports are unused.
+      )
   }
 }
 
@@ -120,11 +123,12 @@ pomExtra := (
     </developers>
 )
 
-publishTo in ThisBuild := sonatypePublishTo.value
-
 scalafmtOnCompile in Compile := true
+
+publishTo := sonatypePublishToBundle.value
 
 credentials := {
   val ivyCredentials = (baseDirectory in LocalRootProject).value / ".credentials"
-  Credentials(ivyCredentials) :: Nil
+  val gpgCredentials = (baseDirectory in LocalRootProject).value / ".gpgCredentials"
+  Credentials(ivyCredentials) :: Credentials(gpgCredentials) :: Nil
 }
